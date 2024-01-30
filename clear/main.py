@@ -551,19 +551,25 @@ helper = util_base.UtilHelper()
 helper.load_and_register_plugins(plugins, cli)
 
 @cli.command()
-def logging():
+@cli.option('-a','--all', is_flag=True)
+def logging(all):
     """Clear logging files"""
     if os.path.exists("/var/log.tmpfs"):
         log_path = "/var/log.tmpfs"
     else:
         log_path = "/var/log"
-        
+
+#delete currently active syslog files (syslog & syslog.1)        
     if os.path.isfile("{}/syslog.1".format(log_path)):
         command = "sudo rm -f  {}/syslog.1 {}/syslog".format(log_path, log_path)
     else:
-        command = "sudo rm -f {}/syslog".format(log_path)
-            
+        command = "sudo rm -f {}/syslog".format(log_path)            
     run_command(command)
+
+#delete syslog stored files
+    if (all):
+        command = "sudo rm -f {}/syslog.*.gz".format(log_path)
+        run_command(command)
 
 if __name__ == '__main__':
     cli()
