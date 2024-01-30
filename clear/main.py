@@ -551,7 +551,7 @@ helper = util_base.UtilHelper()
 helper.load_and_register_plugins(plugins, cli)
 
 @cli.command()
-@cli.option('-a','--all', is_flag=True)
+@click.option('-a','--all', is_flag=True)
 def logging(all):
     """Clear logging files"""
     if os.path.exists("/var/log.tmpfs"):
