@@ -557,7 +557,12 @@ def logging():
         log_path = "/var/log.tmpfs"
     else:
         log_path = "/var/log"
-    command = ['sudo', 'rm', '-f', '{}/syslog'.format(log_path)]    
+        
+    if os.path.isfile("{}/syslog.1".format(log_path)):
+        command = "sudo rm -f  {}/syslog.1 {}/syslog".format(log_path, log_path)
+    else:
+        command = "sudo rm -f {}/syslog".format(log_path)
+            
     run_command(command)
 
 if __name__ == '__main__':
