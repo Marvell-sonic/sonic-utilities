@@ -562,7 +562,7 @@ def logging(all):
     
     if all:
         files_to_delete = glob.glob("{}/syslog*".format(log_path))
-    else
+    else:
         files_to_delete = glob.glob("{}/syslog".format(log_path))
     if os.path.isfile("{}/syslog.1".format(log_path))
         files_to_delete += glob.glob("{}/syslog.1".format(log_path))
