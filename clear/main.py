@@ -561,11 +561,12 @@ def logging(all):
         log_path = "/var/log"
     
     if all:
-        files_to_delete = glob.glob("{}/syslog*".format(log_path))
+        files_to_delete = glob.glob(f"{log_path}/syslog*")
     else:
-        files_to_delete = glob.glob("{}/syslog".format(log_path))
-    if os.path.isfile("{}/syslog.1".format(log_path)):
-        files_to_delete += glob.glob("{}/syslog.1".format(log_path))
+        files_to_delete = [f"{log_path}/syslog"]
+        
+    if os.path.isfile(f"{log_path}/syslog.1"):
+        files_to_delete += [f"{log_path}/syslog.1"]
 
     for f in files_to_delete:
         cmd = ['sudo', 'rm' '-f',f]
