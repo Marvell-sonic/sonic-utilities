@@ -569,7 +569,7 @@ def logging(all):
         files_to_delete += [f"{log_path}/syslog.1"]
 
     for f in files_to_delete:
-        cmd = ['sudo', 'rm' '-f',f]
+        cmd = ['sudo', 'rm','-f',f]
         run_command(cmd)
 
 if __name__ == '__main__':
